@@ -1,21 +1,43 @@
+import kotlin.io.path.Path
+import kotlin.io.path.readText
+import kotlin.math.abs
 fun main() {
     fun part1(input: List<String>): Int {
-        return input.size
+        val leftCol = mutableListOf<Int>()
+        val rightCol = mutableListOf<Int>()
+        for (line in input) {
+            val (left, right) = line.split("   ")
+            leftCol.add(left.toInt())
+            rightCol.add(right.toInt())
+        }
+        leftCol.sort()
+        rightCol.sort()
+        var totalDistance = 0
+        for (i in leftCol.indices) {
+            totalDistance += abs(leftCol[i] - rightCol[i])
+        }
+        return totalDistance
     }
 
     fun part2(input: List<String>): Int {
-        return input.size
+        val leftCol = mutableListOf<Int>()
+        val rightCol = mutableListOf<Int>()
+        for (line in input) {
+            val (left, right) = line.split("   ")
+            leftCol.add(left.toInt())
+            rightCol.add(right.toInt())
+        }
+        val count = rightCol.groupingBy { it }.eachCount()
+        var similarityScore = 0
+        for (i in leftCol) {
+            if (i in count.keys) {
+                similarityScore += i * count[i]!!
+            }
+        }
+        return similarityScore
     }
 
-    // Test if implementation meets criteria from the description, like:
-    check(part1(listOf("test_input")) == 1)
-
-    // Or read a large test input from the `src/Day01_test.txt` file:
-    val testInput = readInput("Day01_test")
-    check(part1(testInput) == 1)
-
-    // Read the input from the `src/Day01.txt` file.
-    val input = readInput("Day01")
-    part1(input).println()
-    part2(input).println()
+    val input = Path("src/Day01.txt").readText().trim().lines()
+    println(part1(input))
+    println(part2(input))
 }
