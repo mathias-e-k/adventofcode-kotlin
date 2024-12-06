@@ -37,7 +37,7 @@ fun main() {
         return similarityScore
     }
 
-    val input = Path("src/Day01.txt").readText().trim().lines()
+    val input = Path("src/01.txt").readText().trim().lines()
     println(part1(input))
     println(part2(input))
 }
