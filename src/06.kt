@@ -63,6 +63,6 @@ fun main() {
         }
     }
     var visitedSpaces = 0
-    visitedMap.forEach { visitedSpaces += it.count { it == '#' }; println(it) }
-    println(visitedSpaces)
+    visitedMap.forEach { visitedSpaces += it.count { it == '#' } }
+    println("part1: $visitedSpaces")
 }
